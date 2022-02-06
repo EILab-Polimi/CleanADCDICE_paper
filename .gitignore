@@ -1,0 +1,75 @@
+# gitignore file
+
+
+# Whitelist some files
+!.gitignore
+!README.md
+!CONTRIBUTING.md
+
+
+# Rsession files
+.Rhistory
+.Rapp.history
+.RData
+.Rproj.user/
+
+# GAMS project file 
+*.gpr
+*.~gm
+*.lst
+*.lxi
+*.log
+
+# Cpp standard gtignore
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.app
+
+# Mac
+*.DS_Store
+
+
+# Java
+*.jar
+
+/Burke/BurkeHsiangMiguel2015_Replication/
+CDICE/BorgOutput*
+*__pycache__*
+*COSTS.txt
+*GDP2050.txt
+*GDP2100.txt
+*T2100.txt
+*trajectories.txt
+*traj.txt
+*utility.txt
+*output.txt
+*test_policy.txt
+*rntdynamics*

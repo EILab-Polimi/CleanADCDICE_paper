@@ -1,0 +1,26 @@
+SUMMARY stochastic disturbances
+
+	CARBON INTENSITY
+		Multiplicative disturbance model using the Cauchy distribution 
+		Scale parameter from 1-year obs. (mult. by 5^0.5 for 5-y time step)
+		Scale parameter of Cauchy distribution for 5-y time steps is 0.016552137904146714
+		Truncation: output has to be within (-0.84, +1.16)
+
+	TOTAL FACTOR PRODUCTIVITY (TFP)
+		Additive disturbance model using the Cauchy distribution 
+		scale parameter from 1-year obs. (mult. by 5^0.5 for 5-y time step)
+		Scale parameter of Cauchy distribution for 5-y time steps is 0.06729686032596417
+		Truncation: output has to be within (-0.15*tfp[-1], +0.15*tfp[-1])
+
+	ATMOSPHERIC TEMPERATURE
+		Additive disturbance model using the Normal distribution 
+		standard deviation from 1-year obs. (mult. by 5^0.5 for 5-y time step)
+		standard deviation of Normal distribution for 5-y time steps is 0.2303994409908319
+		Truncation: output has to be within (-4*sigma, +4*sigma)
+
+SUMMARY parametric uncertainty
+
+	CLIMATE SENSITIVITY
+		lognormal fit based on data from Sherwood et al. (2020)
+		Lognormal params: (0.34598597141543364, 1.0628610712148538, 2.0469609959516903)
+		in the C++ code they are in the following order (1.0628610712148538, log(2.0469609959516903), 0.34598597141543364)

@@ -1,0 +1,30 @@
+horizon 500
+econ_tstep 5
+decs_tstep 5
+nobjs 6 // number of objectives
+adaptive 0 // 1 adaptive 0 static
+time_pol 1 // time is an input to the policy if 1
+annmo 0 // multi-output ANN if 1
+exog 0 // number of exogeonus input in policy
+adaptation 1 // 1 use model with adaptation based on de bruin (2014) and agrawala (2010)
+adapteff 1 //
+damages 1 // 1 DICE 2 BURKE 
+niter 100 // number of model iterations
+tatm_stoch 1 // stochastic temperature model
+tfp_stoch 1 // stochastic tfp model
+sigma_stoch 1 // stochastic carbon intensity model
+cl_sen_unc 1 // climate sensitivity uncertainty
+pop_unc 1 // parametric uncertainty in pop
+tfp_unc 1 // parametric uncertainty in tfp
+sigma_unc 1 // parametric uncertainty in sigma 
+abate_unc 1 // parametric uncertainty in abatement
+abatetype_unc 1 // structural uncertainty in abatement
+adapt_unc 1 // parametric uncertainty in adaptation efficiency
+damages_unc 1 // parametric uncertainty in abatement
+rfoth_unc 1 // using all RCPs for other GHG forcing
+limmiu_s 0 // uncertain first period miu>1 - not implemented
+cost_effective 0 // removes temperature damages on the GDP - not implemented
+writefile 0 // writes output file
+scc 0 // use fixed temperature stochastic disturbance for SCC computation	
+grubb 0 //
+rfoth 0 // which rcp to use for other GHG 0=26, 1=45, 2=60, 3=85

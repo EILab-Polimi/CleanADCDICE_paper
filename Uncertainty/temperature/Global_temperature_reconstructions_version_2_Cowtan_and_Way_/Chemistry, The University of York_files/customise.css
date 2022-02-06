@@ -1,0 +1,332 @@
+/*============================================================
+		CUSTOMISE COLOURS  - includes code from t4.css
+============================================================*/
+
+/*============================================================
+		HEADER
+============================================================*/
+/*header font colour,background colour and background image*/
+div#header{
+	color:#FFF;
+	background-color:#000;
+	background-image: url("/media/css/chemistry/watermark.gif");
+}
+
+	/*--header h1 area title colour--*/
+	div#header div#location h1{
+		color:#FFF;
+	}
+
+	/*--search label colour--*/
+	div#header form label{
+		color:#FFF;
+	}
+
+	/*--search box border colour--*/
+	div#header form input{
+		color:#000;
+		border:1px solid #FFF0E6;
+	}
+
+	/*--search button border colour, text colour, background colour--*/
+	div#header form input.submit{
+		color:#000;
+		background-color:#FFFAEF;
+		border:1px solid #FFF0E6;
+	}
+
+		/*--search paragraph separator pipe (|) colour--*/
+		div#header form p{
+			color:#FFF;
+		}
+
+		/*--link colours under search--*/
+		/*link*/
+		div#header form p a:link{
+			color:#FFF;
+		}
+		/*visited*/
+		div#header form p a:visited{
+			color:#FFF;
+		}
+		/*hover*/
+		div#header form p a:hover{
+			color:#FFF;
+		}
+
+/*============================================================
+		EXTRA LINKS
+============================================================*/
+/*--extra-links text colour,background colour--*/
+div#extra-links{
+	color:#000;
+	background-color:#FF8000;
+}
+
+	/*--highlight surrounding links background colour--*/
+	div#extra-links p span{
+		background-color:#FF6600;
+	}
+
+		/*--link colours for extra-links--*/
+		/*link*/
+		div#extra-links p span a:link{
+			color:#000;
+		}
+		/*visited*/
+		div#extra-links p span a:visited{
+			color:#000;
+		}
+		/*hover*/
+		div#extra-links p span a:hover{
+			color:#000;
+		}
+
+
+/*============================================================
+		BREADCRUMB
+============================================================*/
+/*--breadcrumb text colour, background colour--*/
+div#breadcrumb{
+	color:#000;
+	background-color:#FFECBF;
+}
+
+	/*--link colours for breadcrumb--*/
+	/*link*/
+	div#breadcrumb a:link{
+		color:#000;
+	}
+		/*visited*/
+		div#breadcrumb a:visited{
+			color:#000;
+		}
+		/*hover*/
+		div#breadcrumb a:hover{
+			color:#FF8000;
+		}
+
+/*============================================================
+		LEFT COLUMN BLOCKED NAVIGATION
+============================================================*/
+
+
+#nav ul  {
+	border-left:6px solid #DDD;
+}
+#nav ul ul {
+	border-left:6px solid #CCC;
+}
+#nav ul ul ul{
+	border-left:6px solid #BBB;
+}
+#nav ul ul ul ul {
+	border-left:6px solid #AAA;
+}
+
+#nav li a , #nav li li a, #nav li li li a , #nav li li li li a {
+	color: #000;
+	border-bottom: 1px solid white;
+	background-image:url("/media/css/chemistry/arrow_nav.gif");
+}
+
+#nav li a {
+	background-color:#EEE;
+}
+#nav li li a {
+	background-color:#DDD;
+}
+#nav li li li a {
+	background-color:#CCC;
+}
+
+#nav li li li li a {
+	background-color:#BBB;
+}
+#nav li li li li li a {
+	background-color:#AAA;
+}
+
+#nav li span.currentbranch0 a, #nav li span.currentbranch1 a, #nav li span.currentbranch2 a, #nav li span.currentbranch3 a, #nav li span.currentbranch4 a {
+	background-image: url("/media/css/chemistry/arrow_nav_down.gif")
+}
+
+#nav li span.parent, #nav li span.parent a.parent {
+	color:#000;
+	background-color:#FF6600;
+	background-image:url("/media/global/templateimages/arrow_nav_down_white.gif");
+}
+
+
+#nav .children {
+	color:#000;
+	background-color:#FFECBF;
+	background-image:url("/media/css/chemistry/arrow_nav.gif");
+}
+
+/* all levels hover*/
+#nav li a:hover {
+	color:#000 !important;
+	background-color:#FF8000 !important;
+	background-image: url("/media/global/templateimages/arrow_white.gif");
+}
+
+#nav li span.currentbranch0 a:hover, #nav li span.currentbranch1 a:hover, #nav li span.currentbranch2 a:hover, #nav li span.currentbranch3 a:hover, #nav li span.currentbranch4 a:hover   {
+	background-image: url("/media/global/templateimages/arrow_nav_down_white.gif");
+}
+
+
+/*============================================================
+		BOXOUT REGIONS
+============================================================*/
+
+
+
+.boxout, .leftBox, .rightBox {
+	background-color:#ffecbf;
+	border-color:#ffecbf;
+}
+
+.boxoutAlt {
+	background-color:#EEEEEE;
+	border-color:#DDDDDD;
+}
+
+
+/*============================================================
+		MIDDLE COLUMN TEXT FORMATTING
+============================================================*/
+
+/*--H1 to H6 text colour--*/
+div#mdcolumn h1, div#mdcolumn h2, div#mdcolumn h3, div#mdcolumn h4, div#mdcolumn h5, div#mdcolumn h6{
+	color:#000;
+}
+
+div#mdcolumn h2 {
+	border-bottom:3px solid #FFECBF;
+
+}
+
+/* override h2 colour for links  in columns*/
+div#mdcolumn .col-half h2 a:link, div#mdcolumn .col-third h2 a:link,
+div#mdcolumn .col-half h2 a:visited, div#mdcolumn .col-third h2 a:visited,
+div#mdcolumn .col-half h2 a:hover, div#mdcolumn .col-third h2 a:hover{
+	color:#000;
+}
+
+div#mdcolumn li {
+	background:transparent url("/media/css/chemistry/bullet.gif") no-repeat  0px 4px;
+}
+
+/*--HR colour,background colour (BOTH VALUES MUST BE SAME COLOUR)--*/
+div#mdcolumn hr{
+	color:#CCCCCC;
+	background-color:#CCCCCC;
+}
+
+
+	/*--table header border colour, background colour--*/
+	table tr th{
+		background-color:#FF6600;
+			color:#000;
+
+	}
+		/*--table subheader--*/
+	table tbody tr th {
+		background-color:#FFECBF;
+		color:#000;
+	}
+
+	div#mdcolumn ul.tabNavigation li a.selected, div#mdcolumn ul.tabNavigation li a.selected:hover {
+	color: #A42E14;
+	}
+
+
+/*Course template*/
+div#mdcolumn #course-apply-now {
+	background-color: #FF8000;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#FF8000), to(#F60));
+	background-image: -webkit-linear-gradient(top, #FF8000, #F60);
+	background-image: -moz-linear-gradient(top, #FF8000, #F60);
+	background-image: -ms-linear-gradient(top, #FF8000, #F60);
+	background-image: -o-linear-gradient(top, #FF8000, #F60);
+	background-image: linear-gradient(top, #FF8000, #F60);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#FF8000', EndColorStr='#FF6600');
+	border-color: #F60;
+}
+
+div#mdcolumn #course-apply-now:hover {
+	background-color:#F60;
+}
+
+/*============================================================
+		HOMEPAGE FORMATTING
+============================================================*/
+div#mdcolumn .col-half h2, div#mdcolumn .col-third  h2{
+	color:#000;
+	background-color:#FF6600;
+}
+div#mdcolumn .col-half .boxoutAlt h2, div#mdcolumn .col-third  .boxoutAlt h2{
+	color:#FFF;
+	background-color:#666;
+
+
+}
+/*============================================================
+		EVENTS LISTING
+============================================================*/
+
+#upcomingevents .event .eventdate .day {
+	background-color: #FF6600;
+	color:#000;
+}
+
+/*============================================================
+		RIGHT COLUMN TEXT FORMATTING
+============================================================*/
+/*--H1 to H4 text colour--*/
+/*H1 colour*/
+div#rhcolumn h1,div#rhcolumn h2,div#rhcolumn h3,div#rhcolumn h4{
+	color:#000;
+}
+
+div#rhcolumn ul {
+	list-style-type: square;
+	list-style-image:  url("/media/css/chemistry/bullet.gif");
+}
+/*============================================================
+		FOOTER
+============================================================*/
+div#footer{
+	border-top:1px solid #CCC;
+}
+
+/*============================================================
+		General link formatting
+============================================================*/
+
+a:link{
+	color:#981e00;
+}
+a:visited{
+		color:#755;
+	}
+a:hover{
+		color:#ff8000;
+	}
+
+	/*============================================================
+			CALL TO ACTION LINKS
+	============================================================*/
+
+	.cta a, .cta a:link, .cta a:visited, a.cta , a.cta:link, a.cta:visited ,
+	#mdcolumn .cta a[href^="http://"],
+	#mdcolumn .cta a[href^="https://"],
+	#mdcolumn a.cta[href^="http://"],
+	#mdcolumn a.cta[href^="https://"],
+	#rhcolumn .cta a[href^="http://"],
+	#rhcolumn .cta a[href^="https://"],
+	#rhcolumn a.cta[href^="http://"],
+	#rhcolumn a.cta[href^="https://"]{
+		background: #FF6600;
+	}

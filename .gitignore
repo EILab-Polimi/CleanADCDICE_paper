@@ -61,7 +61,7 @@
 *.jar
 
 /Burke/BurkeHsiangMiguel2015_Replication/
-CDICE/BorgOutput*
+CleanADCDICE/BorgOutput*
 *__pycache__*
 *COSTS.txt
 *GDP2050.txt

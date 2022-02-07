@@ -8,3 +8,4 @@ The folder FAIR reports all the code used to calibrate the surrogate neural mode
 
 The folder Uncertainty reports the uncertainty analysis for the stochastic disturbances.
 
+To run the scripts in order to produce the figures, data from https://doi.org/10.5281/zenodo.5996773 should be included in the CleanADCDICE folder.

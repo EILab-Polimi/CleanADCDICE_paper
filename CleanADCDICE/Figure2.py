@@ -149,10 +149,10 @@ allsols = pd.concat([so,dps], ignore_index=True)
 
 allsols = allsols.append(so_sols)
 allsols['TypeID'] = allsols['Type'].astype('category').cat.codes
-allsols['\u0394 CBGE [%]'] = 100 * 
+allsols['\u0394 CBGE [%]'] = 100 * \
 	((allsols.loc[allsols['Type']=='_SO_AD_UNC']['Welfare'].min() / allsols['Welfare'])**(1/(1-1.45)) - 1)
 
-allsols['NPV Total costs [10^12 USD]'] = allsols['NPV Damages [10^12 USD]'] + 
+allsols['NPV Total costs [10^12 USD]'] = allsols['NPV Damages [10^12 USD]'] + \
 	allsols['NPV Adapt. costs [10^12 USD]'] + allsols['NPV Abat. costs [10^12 USD]']
 
 print(allsols['Type'].unique())

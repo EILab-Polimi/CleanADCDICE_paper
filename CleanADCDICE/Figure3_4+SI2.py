@@ -256,7 +256,7 @@ for filt in filters:
               count += 1
        ax.legend()
        ax.set_xlim((2020,2150))
-       ax.set_ylim((0.2,2.0))
+       ax.set_ylim((0.0,2.5))
        plt.tight_layout()
 
 folders = ['BorgOutput_SO_AD_UNC']
@@ -384,7 +384,7 @@ for filt in filters:
               count += 1
        ax.legend()
        ax.set_xlim((2020,2150))
-       ax.set_ylim((0.2,2.0))
+       ax.set_ylim((0.0,2.5))
        plt.tight_layout()
 
 plt.figure()

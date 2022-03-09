@@ -105,7 +105,7 @@ allsols = allsols.loc[allsols['\u0394 CBGE [%]']>=-1.2794494499268727]
 selects = allsols
 selects = selects[[x for x in selects.columns[:6]]].values
 
-# uncomment line below and in c++ model to run under inaction scenarios
+# # uncomment line below and in c++ model to run under inaction scenarios
 
 # nseeds = 5
 # nobjs = 6
@@ -144,7 +144,6 @@ selects = selects[[x for x in selects.columns[:6]]].values
 #               ref = np.asarray([round(x,4) for x in select])
 #               nobjs = 6
 #               if sum(ref[1:-1]) == 0.0:
-#                      print("here")
 #                      with open('./'+folder+'/optADCDICE2016.reference') as f:
 #                             file = f.read()
 #                      ref = [round(float(x),4) for x in file.split("\n")[:-1][0].split(" ")]
@@ -189,24 +188,24 @@ allsols['Method'] = ['Self-adaptive' if x=='DPS' else 'Static intertemporal' for
 allsols.loc[allsols['Type']=='SO_1obj', 'Type'] = 'SO'
 tbp = pd.read_csv('./Inac5y.txt')
 
-epss = [25,1]
+# epss = [25,1]
 dps = tbp.loc[tbp['Type']==1]
-nondom = pareto.eps_sort([list(dps.itertuples(False))], objectives=[1,3], epsilons=epss, kwargs={'maximize':[0]})
-dps = pd.DataFrame.from_records(nondom, columns=list(dps.columns.values))
+# nondom = pareto.eps_sort([list(dps.itertuples(False))], objectives=[1,3], epsilons=epss, kwargs={'maximize':[0]})
+# dps = pd.DataFrame.from_records(nondom, columns=list(dps.columns.values))
 so = tbp.loc[tbp['Type']==0]
-nondom = pareto.eps_sort([list(so.itertuples(False))], objectives=[1,3], epsilons=epss, kwargs={'maximize':[0]})
-so = pd.DataFrame.from_records(nondom, columns=list(so.columns.values))
-tbp = pd.concat([so,dps], ignore_index=True)
+# nondom = pareto.eps_sort([list(so.itertuples(False))], objectives=[1,3], epsilons=epss, kwargs={'maximize':[0]})
+# so = pd.DataFrame.from_records(nondom, columns=list(so.columns.values))
+# tbp = pd.concat([so,dps], ignore_index=True)
 
 tbp10 = pd.read_csv('./InactionOutput.txt')
-epss = [25,1]
+# epss = [25,1]
 dps = tbp10.loc[tbp10['Type']==1]
-nondom = pareto.eps_sort([list(dps.itertuples(False))], objectives=[1,3], epsilons=epss, kwargs={'maximize':[0]})
-dps = pd.DataFrame.from_records(nondom, columns=list(dps.columns.values))
+# nondom = pareto.eps_sort([list(dps.itertuples(False))], objectives=[1,3], epsilons=epss, kwargs={'maximize':[0]})
+# dps = pd.DataFrame.from_records(nondom, columns=list(dps.columns.values))
 so = tbp10.loc[tbp10['Type']==0]
-nondom = pareto.eps_sort([list(so.itertuples(False))], objectives=[1,3], epsilons=epss, kwargs={'maximize':[0]})
-so = pd.DataFrame.from_records(nondom, columns=list(so.columns.values))
-tbp10 = pd.concat([so,dps], ignore_index=True)
+# nondom = pareto.eps_sort([list(so.itertuples(False))], objectives=[1,3], epsilons=epss, kwargs={'maximize':[0]})
+# so = pd.DataFrame.from_records(nondom, columns=list(so.columns.values))
+# tbp10 = pd.concat([so,dps], ignore_index=True)
 
 
 
@@ -232,7 +231,7 @@ for el in range(len(allsols['Type'].unique())):
 plt.xlabel('Warming above 2°C [°C yr]')
 plt.ylabel('\u0394 CBGE [%]')
 plt.legend(loc='center left', bbox_to_anchor=(1.05, 0.5), ncol=1)
-plt.gcf().set_size_inches(9, 4)
+plt.gcf().set_size_inches(7, 4)
 plt.tight_layout()
 
 

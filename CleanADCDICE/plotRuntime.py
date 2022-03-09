@@ -55,6 +55,7 @@ class Rnt:
 
 allsols = []
 folders = ['BorgOutput_SO','BorgOutput_SO_AD','BorgOutput_SO_UNC','BorgOutput_SO_AD_UNC','BorgOutput_SO_AD_UNC_6OBJS','BorgOutput_DPS_AD_UNC_6OBJS',]
+folders = ['BorgOutput_DPS_AD_UNC_6OBJS']
 for folder in folders:
 
 	if '6OBJS' not in folder:

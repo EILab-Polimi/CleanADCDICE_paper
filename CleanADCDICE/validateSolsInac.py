@@ -79,24 +79,62 @@ class Rnt:
 		self.OBJS = []
 		self.PARAMS = []
 
+solsneeded = pd.read_csv('./SimulationValFull.csv')
+epss = [25,0.05,5,1,1,1]
+solsneeded.columns = ['Welfare_cal', 'DegY1.5°C_cal', 'DegY2°C_cal', 'NPV Damages_cal', 'NPV Abatement_cal',
+       'NPV Adaptation_cal', 'Type', 'Welfare', 'P(GMST > 2°C)', 'Warming above 2°C [°C yr]',
+       'NPV Damages [10^12 USD]', 'NPV Abat. costs [10^12 USD]', 'NPV Adapt. costs [10^12 USD]']
+solsneeded = solsneeded.loc[solsneeded['Welfare'] < 0]
+dps = solsneeded.loc[solsneeded['Type']=='DPS']
+nondom = pareto.eps_sort([list(dps.itertuples(False))], 
+       objectives=[7,8,9,10,11,12], epsilons=epss, kwargs={'maximize':[0]})
+dps = pd.DataFrame.from_records(nondom, columns=list(dps.columns.values))
+so = solsneeded.loc[solsneeded['Type']=='SO']
+nondom = pareto.eps_sort([list(so.itertuples(False))], 
+       objectives=[7,8,9,10,11,12], epsilons=epss, kwargs={'maximize':[0]})
+so = pd.DataFrame.from_records(nondom, columns=list(so.columns.values))
+solsneeded = pd.concat([so,dps], ignore_index=True)
+columns_to_use = ['Welfare', 'P(GMST > 2°C)', 'Warming above 2°C [°C yr]',
+       'NPV Damages [10^12 USD]', 'NPV Abat. costs [10^12 USD]', 'NPV Adapt. costs [10^12 USD]']
+nondom = pareto.eps_sort([list(solsneeded.itertuples(False))], 
+       objectives=[7,8,9,10,11,12], epsilons=epss, kwargs={'maximize':[0]})
+solsneeded = pd.DataFrame.from_records(nondom, columns=list(solsneeded.columns.values))
+solsneeded = solsneeded[solsneeded.columns[0:6]].values.tolist()
+# for idx in range(len(solsneeded)):
+# 	solsneeded[idx] = [round(x,4) for x in solsneeded[idx]]
+
 allsols = []
-folders = ['BorgOutput_SO_AD_UNC_6OBJS','BorgOutput_DPS_AD_UNC_6OBJS']
-folders = ['BorgOutput_DPS_AD_UNC_6OBJS']
+folders = ['BorgOutput_SO_AD_UNC','BorgOutput_SO_AD_UNC_6OBJS','BorgOutput_DPS_AD_UNC_6OBJS']
+
 all_val_objs = []
 all_cal_objs = []
 for folder in folders:
 	print(folder)
+	if '6OBJS' in folder:
+		nobjs = 6
+	else:
+		nobjs = 1
 	with open('./'+folder+'/optADCDICE2016.reference') as f:
 		file = f.read()
 	ref = [x.split(' ') for x in file.split("\n")[:-1]]
 	for idx in range(len(ref)):
 		ref[idx] = [float(x) for x in ref[idx]]
+		# ref[idx] = [round(float(x),4) for x in ref[idx]]
+	print(len(ref))
+	if '6OBJS' in folder:
+		newsols = []
+		for el in ref:
+			if el in solsneeded:
+				newsols.append(el)
+		ref = newsols
+	print(len(ref))
 	sols = []
 	for seed in range(nseeds):
 		with open('./'+folder+'/optADCDICE2016_'+str(seed+1)+'.out') as f:
 			file = f.read()
 		outfile = [x.split(' ') for x in file.split("\n")[12:-3]]
 		for idx in range(len(outfile)):
+			# outfile[idx] = [float(x) for x in outfile[idx]]
 			outfile[idx] = [float(x) for x in outfile[idx]]
 		for el in outfile:
 			if len(el) > nobjs and el[-nobjs:] in ref:
@@ -138,7 +176,7 @@ cols = [x+'_val' for x in cols]
 sols_val_pd = pd.DataFrame(all_val_objs, columns=cols)
 val_file = pd.concat([sols_pd, sols_val_pd], axis=1)
 val_file = val_file[[x for x in val_file.columns[:-1]]]
-val_file.to_csv('SimulationValDPS.csv', index=False)
+val_file.to_csv('SimulationValDPSInac10y.csv', index=False)
 
 
 # allsols = allsols.loc[allsols['\u0394 CBGE'] > allsols.loc[allsols['Type']=='SO']['\u0394 CBGE'].min()]

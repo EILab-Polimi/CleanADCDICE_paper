@@ -144,13 +144,13 @@ for folder in folders:
 	output.columns = ['Emission control [%]' if x=='MIU' else x for x in output.columns] 
 	output.columns = ['Adapt. invest. [%GDP]' if x=='IA' else x for x in output.columns] 
 	output.columns = ['Flow adapt. [%GDP]' if x=='FAD' else x for x in output.columns] 
-	output.columns = ['CO2 Ind. Emissions [GtCO2]' if x=='EIND' else x for x in output.columns] 
+	output.columns = ['$\mathregular{CO_{2}}$ Ind. Emissions [Gt$\mathregular{CO_{2}}$]' if x=='EIND' else x for x in output.columns] 
 	
 	linestyle = '-'
 	if 'AD' in folder:
 		linestyle=':'
 	plot_prctiles(output, 'GMST [°C]', ax=ax1[math.floor(count/2)][count%2], color=colors[count], linestyle=linestyle)
-	plot_prctiles(output, 'CO2 Ind. Emissions [GtCO2]', ax=ax2[math.floor(count/2)][count%2], color=colors[count], linestyle=linestyle)
+	plot_prctiles(output, '$\mathregular{CO_{2}}$ Ind. Emissions [Gt$\mathregular{CO_{2}}$]', ax=ax2[math.floor(count/2)][count%2], color=colors[count], linestyle=linestyle)
 	ax1[math.floor(count/2)][count%2].set_xlim((2020,2150))
 	ax2[math.floor(count/2)][count%2].set_xlim((2020,2150))
 	ax1[math.floor(count/2)][count%2].set_ylim((1.0, 4.0))

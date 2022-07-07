@@ -25,6 +25,6 @@ rfoth_unc	1
 limmiu_s 0 // uncertain first period miu>1 - not implemented
 cost_effective 0 // removes temperature damages on the GDP - not implemented
 writefile 1
-scc 0
+scc 1
 grubb 0 //
 rfoth 0 // which rcp to use for other GHG 0=26, 1=45, 2=60, 3=85

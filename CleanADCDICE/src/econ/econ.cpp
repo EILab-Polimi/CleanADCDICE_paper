@@ -277,8 +277,8 @@ void Econ::nextStep(double temp){
 			1.0 - (eind[0] * pow(1.01,5 + t*tstep%tstep)) / 
 			(sigma[t] * ygross[t]));
 	}
-	// uncomment below for inaction analysis
-	// if (2015 + t * tstep <= 2025){
+	// // // uncomment below for inaction analysis
+	// if (2015 + t * tstep <= 2030){
 	// 	dvars->miu[(int) t*tstep/config->decs_tstep] = std::max(0.0,
 	// 		1.0 - (eind[0] * pow(1.01,5 + 1*tstep%tstep)) / 
 	// 		(sigma[t] * ygross[t]));		

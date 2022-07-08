@@ -17,6 +17,7 @@ sns.set_style('ticks')
 sns.set_context('paper')
 
 figsize=(4,3.25)
+figsize=(4/1.25,3.25/1.25)
 
 import matplotlib.font_manager as font_manager
 fontpath = '/Users/angelocarlino/Library/Fonts/OpenSans-Regular.ttf'
@@ -211,6 +212,7 @@ ax2.set_xlim((2020,2150))
 ax2.set_ylim((-25.0, 50.0))
 ax2.plot([x for x in range(2020,2150)],[0.0 for x in range(2020,2150)],'k--', alpha=0.5, zorder=-1)
 plt.tight_layout()
+plt.subplots_adjust(left=0.2)
 
 custom_dict_ad = {'High': 0, 'Nominal': 1, 'Low': 2, 'Zero': 3} 
 custom_dict_tcr = {'Higher than likely': 0, 'Likely': 1, 'Lower than likely': 2} 
@@ -237,6 +239,8 @@ for filt in filters:
        ax.set_xlim((2020,2150))
        ax.plot([x for x in range(2020,2150)],[0.0 for x in range(2020,2150)],'k--', alpha=0.5, zorder=-1)
        plt.tight_layout()
+       plt.subplots_adjust(left=0.2)
+
 
 
 output['Adaptation costs [%GDP]'] = output['Flow adapt. [%GDP]'] + output['Adapt. invest. [%GDP]']
@@ -340,6 +344,8 @@ ax1 = plot_prctiles(output, 'GMST [°C]', ax=ax1, color='red')
 plt.tight_layout()
 ax2 = plot_prctiles(output, '$\mathregular{CO_{2}}$ Ind. Emissions [Gt$\mathregular{CO_{2}}$]', ax=ax2, color='red')
 plt.tight_layout()  
+plt.subplots_adjust(left=0.2)
+
 
 custom_dict_ad = {'High': 0, 'Nominal': 1, 'Low': 2, 'Zero': 3} 
 custom_dict_tcr = {'Higher than likely': 0, 'Likely': 1, 'Lower than likely': 2} 
@@ -366,6 +372,8 @@ for filt in filters:
        ax.set_xlim((2020,2150))
        ax.plot([x for x in range(2020,2150)],[0.0 for x in range(2020,2150)],'k--', alpha=0.5, zorder=-1)
        plt.tight_layout()
+       plt.subplots_adjust(left=0.2)
+
 
 output['Adaptation costs [%GDP]'] = output['Flow adapt. [%GDP]'] + output['Adapt. invest. [%GDP]']
 filters = ['Adapt. eff.','Damages type','TCR']

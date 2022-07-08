@@ -120,14 +120,14 @@ hvs5 = pd.DataFrame(hvs5, columns=['Method','Hypervolume'])
 hvs10 = [['SO', hvso10],['DPS',hvdps10]]
 hvs10 = pd.DataFrame(hvs10, columns=['Method','Hypervolume'])
 
-hvs['Method'] = ['Static intertemporal' if x=='SO' else 'Self-adaptive' for x in hvs['Method']]
-hvs5['Method'] = ['Static intertemporal' if x=='SO' else 'Self-adaptive' for x in hvs5['Method']]
-hvs10['Method'] = ['Static intertemporal' if x=='SO' else 'Self-adaptive' for x in hvs10['Method']]
-fracs['Method'] = ['Static intertemporal' if x=='SO' else 'Self-adaptive' for x in fracs['Method']]
+hvs['Method'] = ['Static' if x=='SO' else 'Self-adaptive' for x in hvs['Method']]
+hvs5['Method'] = ['Static' if x=='SO' else 'Self-adaptive' for x in hvs5['Method']]
+hvs10['Method'] = ['Static' if x=='SO' else 'Self-adaptive' for x in hvs10['Method']]
+fracs['Method'] = ['Static' if x=='SO' else 'Self-adaptive' for x in fracs['Method']]
 
 palette = ['darkorchid','forestgreen']
 
-fig, ax = plt.subplots(1,3, sharey=True)
+fig, ax = plt.subplots(1,3, sharey=True, figsize=(8/1.25,4/1.25))
 # sns.barplot(data=fracs, y='Percentage', x='Method', palette=palette, ax = ax[0])
 # ax[0].set_ylabel('Percentage of solutions in the final reference set')
 sns.barplot(data=hvs, y='Hypervolume', x='Method',palette=palette, ax=ax[0])
@@ -138,6 +138,5 @@ ax[1].set_ylabel('')
 ax[1].set_xlabel('5-year climate inaction')
 ax[2].set_ylabel('')
 ax[2].set_xlabel('10-year climate inaction')
-plt.subplots_adjust(wspace=0.3, top=0.97, left=0.1, right=0.95)
-
+plt.subplots_adjust(wspace=0.3, top=0.97, left=0.1, right=0.95, bottom=0.2)
 plt.show()

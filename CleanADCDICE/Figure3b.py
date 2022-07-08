@@ -82,15 +82,15 @@ hvdps = float(hvdps)/float(hvref)
 hvs = [['SO', hvso],['DPS',hvdps]]
 hvs = pd.DataFrame(hvs, columns=['Method','Hypervolume'])
 
-hvs['Method'] = ['Static intertemporal' if x=='SO' else 'Self-adaptive' for x in hvs['Method']]
-fracs['Method'] = ['Static intertemporal' if x=='SO' else 'Self-adaptive' for x in fracs['Method']]
+hvs['Method'] = ['Static' if x=='SO' else 'Self-adaptive' for x in hvs['Method']]
+fracs['Method'] = ['Static' if x=='SO' else 'Self-adaptive' for x in fracs['Method']]
 
 palette = ['darkorchid','forestgreen']
 
-fig, ax = plt.subplots(1,2)
+fig, ax = plt.subplots(1,2, figsize=(7/1.5,6/1.5))
 sns.barplot(data=fracs, y='Percentage', x='Method', palette=palette, ax = ax[0])
 ax[0].set_ylabel('Percentage of solutions in the final reference set')
 sns.barplot(data=hvs, y='Hypervolume', x='Method',palette=palette, ax=ax[1])
-plt.subplots_adjust(wspace=0.3, top=0.97, left=0.1, right=0.95)
+plt.subplots_adjust(wspace=0.4, top=0.97, left=0.125, hspace=0.4, right=0.975)
 
 plt.show()

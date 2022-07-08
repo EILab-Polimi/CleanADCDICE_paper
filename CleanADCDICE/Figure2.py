@@ -35,13 +35,13 @@ epss = [25,0.05,5,1,1,1]
 
 allsols.columns = ['Welfare_cal', 'DegY1.5°C_cal', 'DegY2°C_cal', 'NPV Damages_cal', 'NPV Abatement_cal',
        'NPV Adaptation_cal', 'Type', 'Welfare', 'P(GMST > 2°C)', 'Warming above 2°C [°C]',
-       'NPV Damages [10^12 USD]', 'NPV Abat. costs [10^12 USD]', 'NPV Adapt. costs [10^12 USD]']#,
+       'NPV Damages [10<sup>12</sup> USD]', 'NPV Abat. costs [10<sup>12</sup> USD]', 'NPV Adapt. costs [10<sup>12</sup> USD]']#,
        # 'P > 1.5°C', 'P > 2°C']
 
 allsols['TypeID'] = allsols['Type'].astype('category').cat.codes
 allsols['\u0394 CBGE [%]'] = 100 * ((allsols.loc[allsols['Type']=='SO_1obj']['Welfare'].min() / allsols['Welfare'])**(1/(1-1.45)) - 1)
 # allsols['\u0394 CBGE [%]'] = 100 * ((-508595.92753430415 / allsols['Welfare'])**(1/(1-1.45)) - 1)
-allsols['NPV Total costs [10^12 USD]'] = allsols['NPV Damages [10^12 USD]'] + allsols['NPV Adapt. costs [10^12 USD]'] + allsols['NPV Abat. costs [10^12 USD]']
+allsols['NPV Total costs [10<sup>12</sup> USD]'] = allsols['NPV Damages [10<sup>12</sup> USD]'] + allsols['NPV Adapt. costs [10<sup>12</sup> USD]'] + allsols['NPV Abat. costs [10<sup>12</sup> USD]']
 
 allsols = allsols.loc[allsols['Welfare']<0]
 
@@ -96,14 +96,14 @@ fig = go.Figure(data =
 			# 	label = 'P > 1.5°C', values = vec['P > 1.5°C']),
 			# dict(range = [vec['P > 2°C'].min(), vec['P > 2°C'].max()],
 			# 	label = 'P > 2°C', values = vec['P > 2°C']),
-			dict(range = [vec['NPV Abat. costs [10^12 USD]'].min(), vec['NPV Abat. costs [10^12 USD]'].max()],
-				label = 'NPV Abat. costs [10^12 USD]', values = vecdps['NPV Abat. costs [10^12 USD]']),
-			dict(range = [vec['NPV Damages [10^12 USD]'].min(), vec['NPV Damages [10^12 USD]'].max()],
-				label = 'NPV Damages [10^12 USD]', values = vecdps['NPV Damages [10^12 USD]']),
-			dict(range = [vec['NPV Adapt. costs [10^12 USD]'].min(), vec['NPV Adapt. costs [10^12 USD]'].max()],
-				label = 'NPV Adapt. costs [10^12 USD]', values = vecdps['NPV Adapt. costs [10^12 USD]']),
-			# dict(range = [vec['NPV Total costs [10^12 USD]'].min(), vec['NPV Total costs [10^12 USD]'].max()],
-			# 	label = 'NPV Total costs [10^12 USD]', values = vec['NPV Total costs [10^12 USD]']),
+			dict(range = [vec['NPV Abat. costs [10<sup>12</sup> USD]'].min(), vec['NPV Abat. costs [10<sup>12</sup> USD]'].max()],
+				label = 'NPV Abat. costs [10<sup>12</sup> USD]', values = vecdps['NPV Abat. costs [10<sup>12</sup> USD]']),
+			dict(range = [vec['NPV Damages [10<sup>12</sup> USD]'].min(), vec['NPV Damages [10<sup>12</sup> USD]'].max()],
+				label = 'NPV Damages [10<sup>12</sup> USD]', values = vecdps['NPV Damages [10<sup>12</sup> USD]']),
+			dict(range = [vec['NPV Adapt. costs [10<sup>12</sup> USD]'].min(), vec['NPV Adapt. costs [10<sup>12</sup> USD]'].max()],
+				label = 'NPV Adapt. costs [10<sup>12</sup> USD]', values = vecdps['NPV Adapt. costs [10<sup>12</sup> USD]']),
+			# dict(range = [vec['NPV Total costs [10<sup>12</sup> USD]'].min(), vec['NPV Total costs [10<sup>12</sup> USD]'].max()],
+			# 	label = 'NPV Total costs [10<sup>12</sup> USD]', values = vec['NPV Total costs [10<sup>12</sup> USD]']),
 			])
 		)
 	, layout = go.Layout(height=800, width=1600)
@@ -147,14 +147,14 @@ fig = go.Figure(data =
 			# 	label = 'P > 1.5°C', values = vec['P > 1.5°C']),
 			# dict(range = [vec['P > 2°C'].min(), vec['P > 2°C'].max()],
 			# 	label = 'P > 2°C', values = vec['P > 2°C']),
-			dict(range = [vec['NPV Abat. costs [10^12 USD]'].min(), vec['NPV Abat. costs [10^12 USD]'].max()],
-				label = 'NPV Abat. costs [10^12 USD]', values = vecso['NPV Abat. costs [10^12 USD]']),
-			dict(range = [vec['NPV Damages [10^12 USD]'].min(), vec['NPV Damages [10^12 USD]'].max()],
-				label = 'NPV Damages [10^12 USD]', values = vecso['NPV Damages [10^12 USD]']),
-			dict(range = [vec['NPV Adapt. costs [10^12 USD]'].min(), vec['NPV Adapt. costs [10^12 USD]'].max()],
-				label = 'NPV Adapt. costs [10^12 USD]', values = vecso['NPV Adapt. costs [10^12 USD]']),
-			# dict(range = [vec['NPV Total costs [10^12 USD]'].min(), vec['NPV Total costs [10^12 USD]'].max()],
-			# 	label = 'NPV Total costs [10^12 USD]', values = vec['NPV Total costs [10^12 USD]']),
+			dict(range = [vec['NPV Abat. costs [10<sup>12</sup> USD]'].min(), vec['NPV Abat. costs [10<sup>12</sup> USD]'].max()],
+				label = 'NPV Abat. costs [10<sup>12</sup> USD]', values = vecso['NPV Abat. costs [10<sup>12</sup> USD]']),
+			dict(range = [vec['NPV Damages [10<sup>12</sup> USD]'].min(), vec['NPV Damages [10<sup>12</sup> USD]'].max()],
+				label = 'NPV Damages [10<sup>12</sup> USD]', values = vecso['NPV Damages [10<sup>12</sup> USD]']),
+			dict(range = [vec['NPV Adapt. costs [10<sup>12</sup> USD]'].min(), vec['NPV Adapt. costs [10<sup>12</sup> USD]'].max()],
+				label = 'NPV Adapt. costs [10<sup>12</sup> USD]', values = vecso['NPV Adapt. costs [10<sup>12</sup> USD]']),
+			# dict(range = [vec['NPV Total costs [10<sup>12</sup> USD]'].min(), vec['NPV Total costs [10<sup>12</sup> USD]'].max()],
+			# 	label = 'NPV Total costs [10<sup>12</sup> USD]', values = vec['NPV Total costs [10<sup>12</sup> USD]']),
 			])
 		)
 	, layout = go.Layout(height=800, width=1600)

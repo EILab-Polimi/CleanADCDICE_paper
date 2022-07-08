@@ -80,122 +80,126 @@ def simulate(params, niter=10, adaptive=1, seed=1):
        print(output)
        return output
 
-allsols = pd.read_csv('./SimulationValFull.csv')
-epss = [25,0.05,5,1,1,1]
+# allsols = pd.read_csv('./SimulationValFull.csv')
+# epss = [25,0.05,5,1,1,1]
 
-allsols.columns = ['Welfare_cal', 'DegY1.5°C_cal', 'DegY2°C_cal', 'NPV Damages_cal', 'NPV Abatement_cal',
-       'NPV Adaptation_cal', 'Type', 'Welfare', 'P(GMST > 2°C)', 'Warming above 2°C [°C]',
-       'NPV Damages [10^12 USD]', 'NPV Abat. costs [10^12 USD]', 'NPV Adapt. costs [10^12 USD]']#,
-       # 'P > 1.5°C', 'P > 2°C']
+# allsols.columns = ['Welfare_cal', 'DegY1.5°C_cal', 'DegY2°C_cal', 'NPV Damages_cal', 'NPV Abatement_cal',
+#        'NPV Adaptation_cal', 'Type', 'Welfare', 'P(GMST > 2°C)', 'Warming above 2°C [°C]',
+#        'NPV Damages [10^12 USD]', 'NPV Abat. costs [10^12 USD]', 'NPV Adapt. costs [10^12 USD]']#,
+#        # 'P > 1.5°C', 'P > 2°C']
 
-allsols['TypeID'] = allsols['Type'].astype('category').cat.codes
-allsols['\u0394 CBGE [%]'] = 100 * ((allsols.loc[allsols['Type']=='SO_1obj']['Welfare'].min() / allsols['Welfare'])**(1/(1-1.45)) - 1)
-allsols['NPV Total costs [10^12 USD]'] = allsols['NPV Damages [10^12 USD]'] + allsols['NPV Adapt. costs [10^12 USD]'] + allsols['NPV Abat. costs [10^12 USD]']
+# allsols['TypeID'] = allsols['Type'].astype('category').cat.codes
+# allsols['\u0394 CBGE [%]'] = 100 * ((allsols.loc[allsols['Type']=='SO_1obj']['Welfare'].min() / allsols['Welfare'])**(1/(1-1.45)) - 1)
+# allsols['NPV Total costs [10^12 USD]'] = allsols['NPV Damages [10^12 USD]'] + allsols['NPV Adapt. costs [10^12 USD]'] + allsols['NPV Abat. costs [10^12 USD]']
 
-allsols = allsols.loc[allsols['Welfare']<0]
+# allsols = allsols.loc[allsols['Welfare']<0]
 
-epss = [25,1]
-dps = allsols.loc[allsols['Type']=='DPS']
-nondom = pareto.eps_sort([list(dps.itertuples(False))], objectives=[7,9], epsilons=epss, kwargs={'maximize':[0]})
-dps = pd.DataFrame.from_records(nondom, columns=list(dps.columns.values))
-so = allsols.loc[allsols['Type'].str.contains('SO')]
-nondom = pareto.eps_sort([list(so.itertuples(False))], objectives=[7,9], epsilons=epss, kwargs={'maximize':[0]})
-so = pd.DataFrame.from_records(nondom, columns=list(so.columns.values))
-allsols = pd.concat([so,dps], ignore_index=True)
-allsols = allsols.loc[allsols['\u0394 CBGE [%]']>=-1.2794494499268727] ## selects same solution as in figure 2, removing solutions worse than static deterministic w.r.t. welfare
-selects = allsols
-selects = selects[[x for x in selects.columns[:6]]].values
+# epss = [25,1]
+# dps = allsols.loc[allsols['Type']=='DPS']
+# nondom = pareto.eps_sort([list(dps.itertuples(False))], objectives=[7,9], epsilons=epss, kwargs={'maximize':[0]})
+# dps = pd.DataFrame.from_records(nondom, columns=list(dps.columns.values))
+# so = allsols.loc[allsols['Type'].str.contains('SO')]
+# nondom = pareto.eps_sort([list(so.itertuples(False))], objectives=[7,9], epsilons=epss, kwargs={'maximize':[0]})
+# so = pd.DataFrame.from_records(nondom, columns=list(so.columns.values))
+# allsols = pd.concat([so,dps], ignore_index=True)
+# allsols = allsols.loc[allsols['\u0394 CBGE [%]']>=-1.2794494499268727] ## selects same solution as in figure 2, removing solutions worse than static deterministic w.r.t. welfare
+# selects = allsols
+# selects = selects[[x for x in selects.columns[:6]]].values
 
-nseeds = 5
-nobjs = 6
-path = './'
-RNTS = {}
-srand = np.random.randint(0,1e6)
-class Rnt:
-       def __init__(self):
-              self.NFE = []
-              self.SBX = []
-              self.DE = []
-              self.PCX = []
-              self.SPX = []
-              self.UNDX = []
-              self.UM = []
-              self.IMP = []
-              self.RES = []
-              self.ARCSIZE = []
-              self.OBJS = []
-              self.PARAMS = []
+# nseeds = 5
+# nobjs = 6
+# path = './'
+# RNTS = {}
+# srand = np.random.randint(0,1e6)
+# class Rnt:
+#        def __init__(self):
+#               self.NFE = []
+#               self.SBX = []
+#               self.DE = []
+#               self.PCX = []
+#               self.SPX = []
+#               self.UNDX = []
+#               self.UM = []
+#               self.IMP = []
+#               self.RES = []
+#               self.ARCSIZE = []
+#               self.OBJS = []
+#               self.PARAMS = []
 
-allsols = []
-folders = ['BorgOutput_SO_AD_UNC','BorgOutput_SO_AD_UNC_6OBJS','BorgOutput_DPS_AD_UNC_6OBJS']
+# allsols = []
+# folders = ['BorgOutput_SO_AD_UNC','BorgOutput_SO_AD_UNC_6OBJS','BorgOutput_DPS_AD_UNC_6OBJS']
 
-all_val_objs = []
-all_cal_objs = []
-sccs = []
-mcabates = []
-tbp = []
-for select in selects:
-       flag = 0
-       for folder in folders:
-              if flag == 1:
-                     break
-              print(folder)
-              nobjs = 1
-              ref = np.asarray([round(x,4) for x in select])
-              nobjs = 6
-              if sum(ref[1:-1]) == 0.0:
-                     print("here")
-                     with open('./'+folder+'/optADCDICE2016.reference') as f:
-                            file = f.read()
-                     ref = [round(float(x),4) for x in file.split("\n")[:-1][0].split(" ")]
-                     nobjs = 1
-              sols = []
-              for seed in range(nseeds):
-                     with open('./'+folder+'/optADCDICE2016_'+str(seed+1)+'.out') as f:
-                            file = f.read()
-                     outfile = [x.split(' ') for x in file.split("\n")[12:-3]]
-                     for idx in range(len(outfile)):
-                            outfile[idx] = [float(x) for x in outfile[idx]]
-                     for el in outfile:
-                            if len(el) > nobjs and \
-                            all(np.asarray([round(x,4) for x in el[-nobjs:]]) == ref):
-                                   sols.append([float(x) for x in el])
-              niter = 1000
-              seed = 2
-              adaptive = 0
-              dec = 'SO'
-              print(ref)
-              if 'DPS' in folder:
-                     adaptive=1
-                     dec = 'DPS'
-              for sol in sols:
-                     print('simulating')
-                     val_obj = simulate(sol[:-nobjs], adaptive=adaptive, niter=niter, seed=seed)
-                     mcabate = pd.read_csv('./SimulationsOutput.txt', sep='\t')[['YEAR','MCABATE']]
-                     scc = pd.read_csv('./SCC.txt', sep='\t', names=['ITER','YEAR','SCC [USD/tCO2]'])
+# all_val_objs = []
+# all_cal_objs = []
+# sccs = []
+# mcabates = []
+# tbp = []
+# for select in selects:
+#        flag = 0
+#        for folder in folders:
+#               if flag == 1:
+#                      break
+#               print(folder)
+#               nobjs = 1
+#               ref = np.asarray([round(x,4) for x in select])
+#               nobjs = 6
+#               if sum(ref[1:-1]) == 0.0:
+#                      print("here")
+#                      with open('./'+folder+'/optADCDICE2016.reference') as f:
+#                             file = f.read()
+#                      ref = [round(float(x),4) for x in file.split("\n")[:-1][0].split(" ")]
+#                      nobjs = 1
+#               sols = []
+#               for seed in range(nseeds):
+#                      with open('./'+folder+'/optADCDICE2016_'+str(seed+1)+'.out') as f:
+#                             file = f.read()
+#                      outfile = [x.split(' ') for x in file.split("\n")[12:-3]]
+#                      for idx in range(len(outfile)):
+#                             outfile[idx] = [float(x) for x in outfile[idx]]
+#                      for el in outfile:
+#                             if len(el) > nobjs and \
+#                             all(np.asarray([round(x,4) for x in el[-nobjs:]]) == ref):
+#                                    sols.append([float(x) for x in el])
+#               niter = 1000
+#               seed = 2
+#               adaptive = 0
+#               dec = 'SO'
+#               print(ref)
+#               if 'DPS' in folder:
+#                      adaptive=1
+#                      dec = 'DPS'
+#               for sol in sols:
+#                      print('simulating')
+#                      val_obj = simulate(sol[:-nobjs], adaptive=adaptive, niter=niter, seed=seed)
+#                      mcabate = pd.read_csv('./SimulationsOutput.txt', sep='\t')[['YEAR','MCABATE']]
+#                      scc = pd.read_csv('./SCC.txt', sep='\t', names=['ITER','YEAR','SCC [USD/tCO2]'])
 
-                     tbp.append([val_obj[0], val_obj[2], adaptive, 
-                            scc.loc[scc['YEAR']==2020]['SCC [USD/tCO2]'].median(),
-                            scc.loc[scc['YEAR']==2025]['SCC [USD/tCO2]'].median(),
-                            scc.loc[scc['YEAR']==2030]['SCC [USD/tCO2]'].median()])
-                     if dec=='DPS':
-                            scc['Method'] = 'Self-Adaptive'
-                            mcabate['Method'] = 'Self-Adaptive'
-                     else:
-                            scc['Method'] = 'Static intertemporal'
-                            mcabate['Method'] = 'Static intertemporal'
-                     sccs.append(scc)
-                     mcabates.append(mcabate)
-                     flag = 1
+#                      tbp.append([val_obj[0], val_obj[2], adaptive, 
+#                             scc.loc[scc['YEAR']==2020]['SCC [USD/tCO2]'].median(),
+#                             scc.loc[scc['YEAR']==2025]['SCC [USD/tCO2]'].median(),
+#                             scc.loc[scc['YEAR']==2030]['SCC [USD/tCO2]'].median()])
+#                      if dec=='DPS':
+#                             scc['Method'] = 'Self-Adaptive'
+#                             mcabate['Method'] = 'Self-Adaptive'
+#                      else:
+#                             scc['Method'] = 'Static intertemporal'
+#                             mcabate['Method'] = 'Static intertemporal'
+#                      sccs.append(scc)
+#                      mcabates.append(mcabate)
+#                      flag = 1
 
 
-print(tbp)
-tbp = pd.DataFrame(tbp)
-tbp.columns = ['Welfare','Warming above 2°C [°C]','Type','SCC(2020) [USD/tCO2]','SCC(2025) [USD/tCO2]','SCC(2030) [USD/tCO2]']
-print(tbp.loc[tbp['Type']==0]['Welfare'].min())
-tbp['\u0394 CBGE [%]'] = 100 * ((tbp.loc[tbp['Type']==0]['Welfare'].min() / tbp['Welfare'])**(1/(1-1.45)) - 1)
-tbp['Method'] = ['Self-adaptive' if x==1 else 'Static intertemporal' for x in tbp['Type'] ]
-tbp.to_csv('./SCC_output.txt')
+# print(tbp)
+# tbp = pd.DataFrame(tbp)
+# tbp.columns = ['Welfare','Warming above 2°C [°C]','Type','SCC(2020) [USD/tCO2]','SCC(2025) [USD/tCO2]','SCC(2030) [USD/tCO2]']
+# print(tbp.loc[tbp['Type']==0]['Welfare'].min())
+# tbp['\u0394 CBGE [%]'] = 100 * ((tbp.loc[tbp['Type']==0]['Welfare'].min() / tbp['Welfare'])**(1/(1-1.45)) - 1)
+# tbp['Method'] = ['Self-adaptive' if x==1 else 'Static intertemporal' for x in tbp['Type'] ]
+# tbp.to_csv('./SCC_output.txt')
+
+### uncomment above to run simulations and compute SCC
+
+
 tbp = pd.read_csv('./SCC_output.txt')
 allsols = tbp
 
@@ -207,21 +211,21 @@ for el in range(len(allsols['Type'].unique())):
        cm = ax[0].scatter(sel['Warming above 2°C [°C]'].values.tolist(),
               sel['SCC(2020) [USD/tCO2]'].values.tolist(), c=sel['\u0394 CBGE [%]'].values.tolist(), 
               cmap='viridis_r', vmin=tbp['\u0394 CBGE [%]'].min(),  vmax = tbp['\u0394 CBGE [%]'].max(), 
-              marker=markers[el], alpha=0.8, label=sel['Method'].values[0], edgecolor='k', s=30)
+              marker=markers[el], alpha=0.8, label=sel['Method'].values[0], edgecolor='k', s=50, linewidth=.5)
        ax[1].scatter(sel['Warming above 2°C [°C]'].values.tolist(),
               sel['SCC(2030) [USD/tCO2]'].values.tolist(), c=sel['\u0394 CBGE [%]'].values.tolist(), 
               cmap='viridis_r', vmin=tbp['\u0394 CBGE [%]'].min(),  vmax = tbp['\u0394 CBGE [%]'].max(), 
-              marker=markers[el], alpha=0.8, label=sel['Method'].values[0], edgecolor='k', s=30)
+              marker=markers[el], alpha=0.8, label=sel['Method'].values[0], edgecolor='k', s=50, linewidth=.5)
 
 ax[0].set_xlabel('Warming above 2°C [°C]')
 ax[1].set_xlabel('Warming above 2°C [°C]')
-ax[0].set_ylabel('Median SCC [USD/tCO2]')
+ax[0].set_ylabel('Median SCC [USD $\mathregular{{tCO}_{2}^{-1}}$]')
 plt.tight_layout()
 plt.subplots_adjust(bottom=0.05)
 cbar = plt.colorbar(cm, ax=ax[0:2], shrink=0.6, location='bottom')
 cbar.set_label('\u0394 CBGE [%]')
 plt.legend(loc='center left', bbox_to_anchor=(1.05, 0.5), ncol=1)
-plt.gcf().set_size_inches(9, 5)
+plt.gcf().set_size_inches(9/1.25, 5/1.25)
 plt.figure()
 legend_elements = [Line2D([0], [0], color='w', markeredgecolor='k', marker='^', lw=0, label='Static intertemporal',
                      markersize=7.5),

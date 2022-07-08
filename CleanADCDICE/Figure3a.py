@@ -185,7 +185,7 @@ for el in range(len(allsols['Type'].unique())):
 plt.xlabel('Warming above 2°C [°C]')
 plt.ylabel('\u0394 CBGE [%]')
 plt.legend(loc='center left', bbox_to_anchor=(1.05, 0.5), ncol=1)
-plt.gcf().set_size_inches(9, 4)
+plt.gcf().set_size_inches(9/1.1, 4/1.25)
 plt.tight_layout()
 
 allsols = allsols.drop(['Method'], axis=1)
